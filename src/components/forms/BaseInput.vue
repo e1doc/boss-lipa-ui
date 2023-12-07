@@ -4,6 +4,7 @@
       <input
         @focus="handleFocus"
         @blur="handleBlur"
+        @paste="preventPaste"
         v-model="inputData"
         :placeholder="placeholder"
         :type="type === 'password' ? passType : type"
@@ -155,6 +156,11 @@ export default {
         parts.push("00");
       }
       return parts.join(".");
+    },
+    preventPaste(event) {
+      if (this.type === "email") {
+        event.preventDefault();
+      }
     },
   },
 };

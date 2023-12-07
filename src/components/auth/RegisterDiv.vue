@@ -152,6 +152,7 @@ export default {
   computed: {
     ...mapGetters(["registerSuccess", "validationMessages"]),
   },
+  mounted() {},
   methods: {
     ...mapActions(["registerUser"]),
     async register() {
