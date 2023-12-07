@@ -1,0 +1,279 @@
+<template>
+  <div class="modal flex-center">
+    <div class="meta-modal">
+      <div class="meta-wrap">
+        <div class="meta-modal-body flex-wrap">
+          <h3 class="mb20 modal-title">Payment Details</h3>
+          <div class="meta-body-items">
+            <div class="meta-input-group">
+              <div class="meta-input-label">Payor's Name</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{ currentPisoPayTransaction.customer_name }}
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">Payor's Email</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{ currentPisoPayTransaction.customer_email }}
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">Payor's Phone</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{ currentPisoPayTransaction.customer_phone }}
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">Total Amount Paid</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                PHP
+                {{
+                  formatCurrency(
+                    parseFloat(currentPisoPayTransaction.amount).toFixed(2)
+                  )
+                }}
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">Transaction Date</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                currentPisoPayTransaction.transaction_date
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">Transaction Id</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                currentPisoPayTransaction.transaction_id
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">Reference No.</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{ currentPisoPayTransaction.reference_number }}
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">SOA</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{ currentPisoPayTransaction.trace_number.reference_number }}
+              </div>
+            </div>
+            <div class="meta-input-group" v-if="currentType === 'business'">
+              <div class="meta-input-label">ACCOUNT #</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{
+                  currentPisoPayTransaction.trace_number.business_application
+                    .account_number
+                }}
+              </div>
+            </div>
+            <div class="meta-input-group" v-if="currentType !== 'business'">
+              <div class="meta-input-label">TD#</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{
+                  currentPisoPayTransaction.trace_number.building_application
+                    .buildingdetails.tax_dec_no
+                }}
+              </div>
+            </div>
+            <div class="meta-input-group">
+              <div class="meta-input-label">STATUS</div>
+              <div class="meta-input-value">
+                <span class="separator">:</span>
+                {{ currentPisoPayTransaction.status_message }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+import AppLink from "@/components/AppLink";
+import BaseFileUploader from "@/components/forms/BaseFileUploader";
+export default {
+  name: "PisoPayDetailsModal",
+  components: {
+    AppLink,
+    BaseFileUploader,
+  },
+  computed: {
+    ...mapGetters([
+      "currentPisoPayTransaction",
+      "currentType",
+      "paymentDetails",
+      "isFileUploaded",
+      "isAdminAuthenticated",
+    ]),
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      uploadHasError: false,
+    };
+  },
+  methods: {
+    replaceUrl(url) {
+      return url.replace("/lipa/", "/");
+    },
+    async onClickCallback(status) {
+      if (status) {
+        if (this.isFileUploaded) {
+          this.$modal.hide("paymentViewDetailsModal");
+          let payload = this.paymentDetails;
+          payload.append("id", this.currentLandBankTransaction.id);
+          await this.$store.dispatch("verifyBankTransaction", payload);
+        } else {
+          this.$swal({
+            title: "Failed!",
+            text: "Please fix the validation errors.",
+            icon: "error",
+          });
+          this.uploadHasError = true;
+        }
+      } else {
+        this.$modal.hide("paymentViewDetailsModal");
+      }
+    },
+    formatCurrency(str) {
+      var parts = str.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (parts.length < 2) {
+        parts.push("00");
+      }
+      return parts.join(".");
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss">
+.modal {
+  min-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 30px 0;
+
+  .meta-modal {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background: #ffffff;
+    color: #2b2b2b;
+    .meta-modal-body {
+      font-size: 18px;
+      font-family: Proxima Nova Rg;
+      line-height: 1.4;
+      padding: 50px 30px 40px;
+      .meta-body-items {
+        width: 100%;
+      }
+      .modal-title {
+        width: 100%;
+        text-align: left;
+        padding-left: 10px;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+      }
+      .meta-input-group {
+        width: calc(100% - 20px);
+        padding: 0 10px;
+        align-items: center;
+        display: flex;
+        margin-bottom: 20px;
+        .input-field {
+          width: 100%;
+        }
+        .meta-input-label {
+          width: 40%;
+          float: left;
+
+          font-size: 16px;
+          font-family: Proxima Nova Rg;
+          line-height: 1.4;
+          margin-bottom: 0;
+        }
+        .meta-input-value {
+          width: 60%;
+          float: left;
+          font-size: 16px;
+          font-family: Proxima Nova Rg;
+          line-height: 1.4;
+
+          span.separator {
+            margin-right: 20px;
+          }
+        }
+        .meta-link {
+          cursor: pointer;
+          transition: 0.4s;
+          a {
+            color: #2699fb;
+            font-size: 16px;
+          }
+        }
+        .meta-link:hover {
+          color: #4791db;
+        }
+      }
+      .meta-upload-div {
+        width: 100%;
+        padding: 0 10px;
+      }
+    }
+    .meta-buttons {
+      width: 100%;
+      button {
+        width: 50%;
+        float: left;
+        background-color: transparent;
+        border: 0;
+        padding: 20px 10px;
+        border-top: 1px solid #eee;
+        font-size: 15px;
+        font-weight: bold;
+        font-family: Proxima Nova Rg;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      button:focus {
+        outline: 0;
+      }
+      button.agree {
+        border-right: 1px solid #eee;
+        border-bottom-left-radius: 15px;
+      }
+      button.cancel {
+        border-bottom-right-radius: 15px;
+      }
+      button.agree:hover {
+        color: #fff;
+        background-color: #4791db;
+      }
+      button.cancel:hover {
+        color: #fff;
+        background-color: #f44336;
+      }
+    }
+  }
+}
+</style>
