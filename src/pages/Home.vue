@@ -158,7 +158,7 @@
           </div>
 
           <button class="close" @click="closeGuide">
-            X
+            <font-awesome-icon icon="times" />
           </button>
           <button class="next" @click="proceedToDestination">NEXT</button>
         </div>
@@ -415,12 +415,20 @@ export default {
 .guide .close {
   background-color: transparent;
   position: absolute;
-  top: 10px;
-  right: 5px;
-  padding: 5px 10px;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px 3px 12px;
+  font-size: 10px;
   border: none;
   font-size: 18px;
   font-weight: bold;
+  border-radius: 50%;
+  background-color: #e8726f;
+  color: whitesmoke;
+}
+
+.guide .close:hover {
+  opacity: 0.8;
 }
 
 .guide .next {

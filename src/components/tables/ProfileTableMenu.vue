@@ -190,6 +190,9 @@ MOBILE RESPONSIVENESS ------------------------------------------- */
 
   .profile-menus {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .menu-holder .right-div .menu-type {
     display: flex;

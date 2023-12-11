@@ -226,7 +226,7 @@ div.admin-container {
     div.item-content
     div.item-icon
     .icon {
-    color: #1492e6;
+    color: #e8726f;
     font-size: 38px;
   }
 

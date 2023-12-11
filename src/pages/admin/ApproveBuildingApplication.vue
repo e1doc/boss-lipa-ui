@@ -1146,8 +1146,8 @@ div.meta-parent-box {
     height: 100%;
     width: 100%;
     padding: 50px;
-    background-color: #eaf6ff;
-    border-radius: 20px;
+    background-color: whitesmoke;
+    box-shadow: 2px 8px 12px 0px gray;
     .meta-form-title {
       font-size: 35px;
       text-align: center;
@@ -1370,6 +1370,10 @@ ul.parent-list > li {
 
 ul.main-list {
   padding-left: 49px !important;
+}
+
+ul.main-list li {
+  color: #2b2b2b !important;
 }
 
 ul.sub-list {

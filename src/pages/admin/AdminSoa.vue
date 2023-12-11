@@ -44,14 +44,14 @@ export default {
 div.admin-container {
   width: 100%;
   div.admin-page-title {
-    color: #1492e6;
+    color: #e8726f;
     font-size: 30px;
     font-weight: bold;
     line-height: 29px;
     text-transform: capitalize;
     margin-bottom: 90px;
     .admin-icon {
-      color: #1492e6;
+      color: #e8726f;
       font-size: 35px;
       margin-right: 15px;
     }

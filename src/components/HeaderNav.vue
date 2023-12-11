@@ -126,6 +126,18 @@
         <ul class="mobile-menu">
           <li
             class="meta-menu"
+            @click="(slidemenu = false), (menuActive = 'home')"
+            :class="{ active: menuActive == 'home' }"
+          >
+            <router-link to="home">
+              <span class="meta-label flex-center" @click="slidemenu = false">
+                <font-awesome-icon icon="user-circle" class="mr10 icon" />
+                Home
+              </span>
+            </router-link>
+          </li>
+          <li
+            class="meta-menu"
             @click="(slidemenu = false), (menuActive = 'profile')"
             :class="{ active: menuActive == 'profile' }"
           >
