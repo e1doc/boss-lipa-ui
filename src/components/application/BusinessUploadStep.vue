@@ -243,7 +243,7 @@ export default {
         businessfloorno: this.businessDetails.floor_no || "",
         businessbarangay: this.businessDetails.barangay || "",
         city: this.businessDetails.city || "",
-        province: "Cavite",
+        province: "Batangas",
         businesstelno: this.businessDetails.telephone_number || "",
         businessemail: this.businessDetails.email_address || "",
         pin: this.businessDetails.property_index_number || "",

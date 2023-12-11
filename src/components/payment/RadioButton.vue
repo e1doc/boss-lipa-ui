@@ -196,7 +196,7 @@ export default {
         {
           title: "this is a placeholder",
           src:
-            "https://s3.ap-southeast-1.amazonaws.com/public.bacoor/lbpinstruction.png",
+            "https://s3.ap-southeast-1.amazonaws.com/public.lipa/lbpinstruction.png",
         },
       ],
       visible: false,
