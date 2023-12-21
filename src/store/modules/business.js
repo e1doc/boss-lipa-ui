@@ -411,6 +411,8 @@ const actions = {
         payload,
         { headers: { Authorization: `jwt ${getters.authToken}` } }
       );
+      console.log(payload);
+      console.log(response.data);
       await dispatch("getBusinessActivity");
     } catch (err) {
       err.response ? console.log(err.response) : console.log(err);
@@ -436,6 +438,7 @@ const actions = {
         payload,
         { headers: { Authorization: `jwt ${getters.authToken}` } }
       );
+
       await commit("setApplicationHasError", false);
       await commit("setBusinessApplication", response.data);
       let errors = { key: "application", value: {} };

@@ -131,7 +131,7 @@
           name="street"
           refs="street_name"
           type="text"
-          class="input-w2"
+          class="input-w2 street"
           inputClass="fw-mobile"
         />
         <base-input
@@ -141,7 +141,7 @@
           name="district"
           refs="district_name"
           type="text"
-          class="input-w2 input-required"
+          class="input-w2 input-required district"
           inputClass="fw-mobile"
           :disabled="true"
         />
@@ -169,7 +169,7 @@
         name="cityprovince"
         refs="city_province"
         type="text"
-        class="disabled"
+        class="disabled city-province"
         inputClass="fw-mobile disabled-input"
         :disabled="true"
       />
@@ -1034,6 +1034,12 @@ MOBILE RESPONSIVENESS
     width: 100%;
     float: left;
     margin-right: 0;
+    flex-direction: unset;
+  }
+
+  div.street,
+  div.district,
+  div.city-province {
     flex-direction: unset;
   }
 

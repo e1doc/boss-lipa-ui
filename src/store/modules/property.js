@@ -442,6 +442,7 @@ const actions = {
   async updateBuildingDetails({ commit, getters }, payload) {
     try {
       payload.id = getters.buildingDetails.id;
+      console.log(payload);
       const response = await axios.put(
         `${baseUrl}/api/building-details/`,
         payload,
@@ -459,6 +460,7 @@ const actions = {
   async updateBuildingOtherDetails({ commit, getters }, payload) {
     try {
       payload.id = getters.buildingOtherDetails.id;
+      console.log(payload);
       const response = await axios.put(
         `${baseUrl}/api/building-other-details/`,
         payload,

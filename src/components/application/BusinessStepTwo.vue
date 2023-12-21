@@ -1024,6 +1024,7 @@ export default {
           },
         };
 
+        /*
         // to update
         try {
           const response = await axios.post(
@@ -1033,12 +1034,28 @@ export default {
           );
 
           if (response.data.Result) {
+            console.log("Success!");
             return true;
           } else {
+            console.log("Failed!");
             return false;
           }
         } catch (error) {
+          console.log("Error!");
           console.log(error);
+        }
+        */
+
+        const response = await axios.post(`${lguLocalEndpoint}`, data, config);
+
+        console.log(response.data);
+
+        if (response.data.Result) {
+          console.log("Success!");
+          return true;
+        } else {
+          console.log("Failed!");
+          return false;
         }
       }
     },

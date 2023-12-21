@@ -272,7 +272,23 @@ export default {
         param: application_params,
       };
 
+      /*
       // to update
+      const response = await axios.post(
+        `${lguLocalEndpoint}`,
+        application_payload,
+        config
+      );
+
+      console.log(response.data);
+
+      if (response.data.Result) {
+        return true;
+      } else {
+        return false;
+      }
+      */
+
       try {
         const response = await axios.post(
           `${lguLocalEndpoint}`,
@@ -280,14 +296,24 @@ export default {
           config
         );
 
+        if (response.data.Status === "Error") {
+          console.error(response.data.Message);
+          // Handle the error condition here
+          return false;
+        }
+
+        console.log(response.data);
+
+        // Continue processing for a successful response
         if (response.data.Result) {
           return true;
         } else {
           return false;
         }
       } catch (error) {
-        console.log(error);
-        return true;
+        console.error("An error occurred:", error);
+        // Handle the error condition here
+        return false;
       }
     },
   },

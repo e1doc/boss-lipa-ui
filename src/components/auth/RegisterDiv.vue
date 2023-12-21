@@ -113,7 +113,10 @@
         <h1>ACCOUNT REGISTRATION</h1>
       </div>
       <div class="note mb30">
-        Success! Your account has been successfully registered!
+        Thank you for signing up with us. As a final step, kindly activate your
+        account by logging in using your registered username and password. Your
+        activation link will be sent to you upon your first login. Please click
+        on the link emailed to you to activate your account
       </div>
       <div class="note">
         Thank you for signing up with us. You can now login to Lipa One Stop
