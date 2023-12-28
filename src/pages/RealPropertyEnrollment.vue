@@ -24,8 +24,8 @@
                 class="mb15"
               />
               <base-input-icon-end
-                label="Tax Declaration Number"
-                placeholder="Enter tax declaration number"
+                label="ARP Number"
+                placeholder="Enter ARP Number"
                 v-model="td_no"
                 name="td_no"
                 refs="td_number"
@@ -110,12 +110,28 @@ export default {
   },
   methods: {
     async verify() {
+      const dateObject = new Date(this.date);
+      const dateWithoutTime = dateObject.toISOString().split("T")[0];
+
+      const year = dateObject.getFullYear();
+      const month = (dateObject.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based
+      const day = dateObject
+        .getDate()
+        .toString()
+        .padStart(2, "0");
+
+      const formattedDate = `${year}-${month}-${day}`;
+
+      console.log(dateObject);
+      console.log(dateWithoutTime);
+      console.log(formattedDate);
+
       let payload = {
         name: "RealPropertyTaxEnrollment",
         param: {
           property_type: this.property_type,
           tdno: this.td_no,
-          ordate: this.date,
+          ordate: formattedDate,
           ornumber: this.official_receipt,
         },
       };
@@ -130,16 +146,22 @@ export default {
             "Content-Type": "application/json",
           },
         };
+        console.log("working1");
         const validateResponse = await axios.get(
           `${process.env.VUE_APP_API_URL}/api/verify-enrollment/?id=${this.td_no}&type=property`,
           { headers: { Authorization: `jwt ${this.authToken}` } }
         );
+        console.log(validateResponse.data);
+        console.log("working2");
         if (!validateResponse.data.is_existing) {
+          console.log("working3");
+          console.log(payload);
           const response = await axios.post(
             `${lguLocalEndpoint}`,
             payload,
             config
           );
+          console.log("working4");
           if (response.data.Status === "Success") {
             if (response.data.Result.referenceid) {
               let building_payload = {
