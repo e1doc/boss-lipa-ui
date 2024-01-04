@@ -55,6 +55,34 @@
             />
           </div>
           <div>
+            <!-- Other input fields -->
+            <div class="gender-radio">
+              <label>Sex:</label>
+              <div>
+                <input
+                  type="radio"
+                  id="male"
+                  value="M"
+                  v-model="sex"
+                  name="gender"
+                />
+                <label for="male">Male</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="female"
+                  value="F"
+                  v-model="sex"
+                  name="gender"
+                />
+                <label for="female">Female</label>
+              </div>
+            </div>
+
+            <!-- Other input fields -->
+          </div>
+          <div>
             <base-input
               label="Email"
               placeholder="Enter email"
@@ -145,6 +173,7 @@ export default {
       middle_name: "",
       last_name: "",
       username: "",
+      sex: "",
       email: "",
       confirm_email: "",
       phone_number: "",
@@ -164,6 +193,7 @@ export default {
         first_name: this.first_name,
         last_name: this.last_name,
         middle_name: this.middle_name,
+        sex: this.sex,
         email: this.email,
         password: this.password,
         phone_number: this.phone_number,
@@ -205,6 +235,12 @@ export default {
   font-size: 14px;
   line-height: 26px;
   letter-spacing: 0.5px;
+}
+
+/* SEX */
+.gender-radio div {
+  display: inline-block;
+  margin-right: 20px; /* Adjust as needed for spacing */
 }
 
 @media only screen and (max-width: 860px) {
