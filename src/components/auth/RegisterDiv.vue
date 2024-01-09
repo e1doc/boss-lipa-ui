@@ -55,9 +55,7 @@
             />
           </div>
           <div>
-            <!-- Other input fields -->
             <div class="gender-radio">
-              <label>Sex:</label>
               <div>
                 <input
                   type="radio"
@@ -79,8 +77,6 @@
                 <label for="female">Female</label>
               </div>
             </div>
-
-            <!-- Other input fields -->
           </div>
           <div>
             <base-input
@@ -238,9 +234,17 @@ export default {
 }
 
 /* SEX */
+.gender-radio {
+  margin-bottom: 15px;
+}
+
 .gender-radio div {
   display: inline-block;
-  margin-right: 20px; /* Adjust as needed for spacing */
+  margin-right: 10px;
+}
+
+.gender-radio div input[type="radio"] {
+  margin-right: 5px;
 }
 
 @media only screen and (max-width: 860px) {
