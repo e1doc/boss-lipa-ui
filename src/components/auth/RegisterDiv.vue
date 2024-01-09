@@ -54,6 +54,7 @@
               :validationMessages="validationMessages.username"
             />
           </div>
+          <!--
           <div>
             <div class="gender-radio">
               <div>
@@ -77,6 +78,36 @@
                 <label for="female">Female</label>
               </div>
             </div>
+          </div>
+          -->
+          <!--
+          <div>
+            <div class="gender-radio">
+              <div>
+                <input
+                  type="radio"
+                  id="male"
+                  value="M"
+                  v-model="sex"
+                  name="sex"
+                />
+                <label for="male">Male</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="female"
+                  value="F"
+                  v-model="sex"
+                  name="sex"
+                />
+                <label for="female">Female</label>
+              </div>
+            </div>
+          </div>
+          -->
+          <div>
+            <sex-input v-model="sex" />
           </div>
           <div>
             <base-input
@@ -155,6 +186,7 @@ import ButtonFull from "@/components/ButtonFull";
 import ButtonFullOutline from "@/components/ButtonFullOutline";
 import BaseInput from "@/components/forms/BaseInput";
 import BaseTelNumber from "@/components/forms/BaseTelNumber";
+import SexInput from "@/components/lipa/SexInput";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "RegisterDiv",
@@ -162,6 +194,7 @@ export default {
     ButtonFull,
     BaseInput,
     BaseTelNumber,
+    SexInput,
   },
   data() {
     return {
@@ -194,6 +227,8 @@ export default {
         password: this.password,
         phone_number: this.phone_number,
       };
+
+      console.log(payload);
 
       this.$store.commit("setValidationMessages", {
         confirm_email: [],
